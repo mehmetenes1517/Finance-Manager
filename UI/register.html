@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style/styles.css">
+</head>
+<body>
+    
+    <nav id="navbar" style="background-color: dodgerblue;color: aliceblue;">
+        
+        <h1>
+            <a href="/">
+                Finance Management System
+            </a>
+        </h1>
+    
+    
+        <div id="flexbox">
+            <a id="boxinside" href="/login.html"><button  >Login</button></a>
+            <a id="boxinside" href="/register.html"><button  >Sign Up</button></a>
+        </div>
+    </nav>
+
+    <div id="form-box">
+        <label for="username">Username :</label>
+        <input name="username" id="username" type="text">
+        <label for="password">Password :</label>
+        <input name="password" id="password" type="password">
+        <label  for="name">Name : </label>
+        <input name="name" id="name" type="text">
+        <label for="surname">Surname : </label>
+        <input name="surname" id="surname" type="text">
+        <label for="phone">Phone Number : </label>
+        <input name="phone" id="phone" type="tel">
+        <button style="background-color: dodgerblue;color: aliceblue;" class="btn-register">Sign Up</button>
+
+    </div>
+
+    <script>
+
+        const button=document.querySelector(".btn-register")
+
+        button.addEventListener("click",async (e)=>{
+            e.preventDefault();
+
+            await fetch("http://localhost:3000/LoginAPI/registeruser",{
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({
+                    username:document.querySelector("#username").value.trim(),
+                    password:document.querySelector("#password").value.trim(),
+                    name:document.querySelector("#name").value.trim(),
+                    surname:document.querySelector("#surname").value.trim(),
+                    phone:document.querySelector("#phone").value.trim(),
+                })
+            })
+            .then(o=>o.json())
+            .then(o=>console.log(o))
+            .catch(e=>console.log(e));
+        });
+
+
+
+    </script>
+
+
+
+
+
+</body>
+</html>
